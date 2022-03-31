@@ -1,0 +1,20 @@
+.idea
+AOL_clean/aol.clean
+Training Part/aol_training.txt
+Testing Part/aol_testing.txt
+Training Part/aol_statistic.txt
+Testing Part/aol_statistic.txt
+Training Part/Sorted Gram
+Training Part/Reduced Gram
+Testing Part/Sorted Gram
+Testing Part/Reduced Gram
+Intersection Gram/CW09B.fwd.terms
+Intersection Gram/single_intersection.txt
+Intersection Gram/duplet_intersection.txt
+Intersection Gram/triplet_intersection.txt
+Intersection Gram/quadruplet_intersection.txt
+Intersection Gram/query log for PISA/First Layer Index
+Intersection Gram/query log for PISA/Split Test Query Output
+Intersection Gram/*.txt
+Intersection Gram/query log for PISA/query output
+Intersection Gram/query log for PISA/*.txt
