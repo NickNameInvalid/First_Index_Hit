@@ -53,15 +53,20 @@ class query_spliter:
             f.write(i + '\n')
         f.close()
 
-
     def enumerate_grams(self, input_list, enum_list):
+        index = 0
         for line in input_list:
             self.gram_combinations(line, enum_list)
+            if index % 500000 == 0:
+                print(index)
+            index += 1
         for i in range(0, len(enum_list)):
             enum_list[i] = sorted(list(set(enum_list[i])))
 
     def gram_combinations(self, line, enum_list):
         grams = re.split(':| ', line.strip())[1:]
+        if len(grams) > 12:
+            return
         for i in range(0, min(len(grams), 4)):
             combs = combinations(grams, i + 1)
             for j in combs:
@@ -83,6 +88,8 @@ class query_spliter:
 
     def gram_combinations_disk(self, line, f_list):
         grams = re.split(':| ', line.strip())[1:]
+        if len(grams) > 12:
+            return
         for i in range(0, min(len(grams), 4)):
             combs = combinations(grams, i + 1)
             for j in combs:
