@@ -2,3 +2,5 @@
 jupyter
 data
 postings
+*.pyc
+*.pyc
