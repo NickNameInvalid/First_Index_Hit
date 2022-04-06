@@ -77,17 +77,27 @@ class query_spliter:
                   open(output_dir + '/train/duplets.txt', 'w+', encoding='utf-8'),
                   open(output_dir + '/train/triplets.txt', 'w+', encoding='utf-8'),
                   open(output_dir + '/train/quadruplets.txt', 'w+', encoding='utf-8')]
-        index = 0
+
+        test_list = [open(output_dir + '/test/single.txt', 'w+', encoding='utf-8'),
+                  open(output_dir + '/test/duplets.txt', 'w+', encoding='utf-8'),
+                  open(output_dir + '/test/triplets.txt', 'w+', encoding='utf-8'),
+                  open(output_dir + '/test/quadruplets.txt', 'w+', encoding='utf-8')]
+
+        # index = 0
         for line in self.train_list:
             self.gram_combinations_disk(line, train_list)
-            if index % 500000 == 0:
-                print(index)
-            index += 1
+            # if index % 500000 == 0:
+            #     print(index)
+            # index += 1
+        for line in self.test_list:
+            self.gram_combinations_disk(line, test_list)
         for f in train_list:
+            f.close()
+        for f in test_list:
             f.close()
 
     def gram_combinations_disk(self, line, f_list):
-        grams = re.split(':| ', line.strip())[1:]
+        grams = re.split(r':|[ ]+', line.strip())[1:]
         if len(grams) > 12:
             return
         for i in range(0, min(len(grams), 4)):
@@ -95,3 +105,15 @@ class query_spliter:
             for j in combs:
                 f_list[i].write(" ".join(j) + '\n')
 
+
+    def generate_sort_command(self, disk, abs_dir):
+        print("cd /mnt/"+ disk + "/" + abs_dir)
+        print("sort train/single.txt |uniq -c > train/single_red.txt")
+        print("sort train/duplets.txt |uniq -c > train/duplets_red.txt")
+        print("sort train/triplets.txt |uniq -c > train/triplets_red.txt")
+        print("sort train/quadruplets.txt |uniq -c > train/quadruplets_red.txt")
+
+        print("sort test/single.txt |uniq -c > test/single_red.txt")
+        print("sort test/duplets.txt |uniq -c > test/duplets_red.txt")
+        print("sort test/triplets.txt |uniq -c > test/triplets_red.txt")
+        print("sort test/quadruplets.txt |uniq -c > test/quadruplets_red.txt")
